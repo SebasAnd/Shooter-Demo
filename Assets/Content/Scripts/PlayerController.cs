@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     public void PlaySelectedDance(int dance)
     {
         playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("Dance Layer"), 1);
-        playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("Base Layer"), 0);
         playerAnimator.SetInteger("Dance", dance);
     }
     private void AnimationUpdate()

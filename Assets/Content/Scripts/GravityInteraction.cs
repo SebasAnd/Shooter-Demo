@@ -10,7 +10,6 @@ public class GravityInteraction : MonoBehaviour
     [SerializeField] private List<GameObject> inRadius;
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject.tag);
         if (other.tag == "Interactable")
         {
             inRadius.Add(other.gameObject);
