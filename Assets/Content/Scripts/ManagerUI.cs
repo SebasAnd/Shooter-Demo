@@ -13,6 +13,7 @@ public class ManagerUI : MonoBehaviour
 
     [SerializeField] private Sprite defaultCrossHair;
     [SerializeField] private Sprite weaponCrossHair;
+    [SerializeField] private GameObject releaseTip;
 
     private void Awake()
     {
@@ -41,10 +42,12 @@ public class ManagerUI : MonoBehaviour
     {
         crossHair.sprite = weaponCrossHair;
         crossHair.color = Color.magenta;
+        releaseTip.gameObject.SetActive(true);
     }
     public void NoHoldingWeapon()
     {
         crossHair.sprite = defaultCrossHair;
         crossHair.color = Color.white;
+        releaseTip.gameObject.SetActive(false);
     }
 }
