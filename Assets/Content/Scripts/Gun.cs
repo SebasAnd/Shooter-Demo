@@ -7,7 +7,6 @@ public class Gun : ScriptableObject
     // Start is called before the first frame update
     public Transform armState;
     public GameObject projectile;
-
     public float force;
     public float bulletDuration;
 

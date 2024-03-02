@@ -29,7 +29,7 @@ public class GravityInteraction : MonoBehaviour
     {
         for (int i = 0; i < inRadius.Count; i++)
         {
-            if (Vector3.Distance(inRadius[i].transform.position, transform.position) < 2.0f)
+            if (Vector3.Distance(inRadius[i].transform.position, transform.position) < 1.0f)
             {
                 inRadius[i].transform.RotateAround(transform.position, Vector3.up, 200 * Time.deltaTime);
                 inRadius[i].transform.RotateAround(transform.position, Vector3.forward, 200 * Time.deltaTime);

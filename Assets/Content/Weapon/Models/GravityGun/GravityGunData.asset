@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armState: {fileID: 4871888447983269786, guid: c22155a23f3f79142bb217b2fa00565a, type: 3}
   projectile: {fileID: 4280430458006388848, guid: 39b1e2b98674c5a4ca5993749615700f, type: 3}
-  force: 10
+  force: 5
   bulletDuration: 5
   weaponType: 1
