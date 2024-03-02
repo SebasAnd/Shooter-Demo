@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
     public void ShootWeaponManager()
     {
-        if (weaponHolder.transform.childCount > 0 && Input.GetButtonDown("Fire1"))
+        if (weaponHolder.transform.childCount > 1 && Input.GetButtonDown("Fire1"))
         {
             currentWeapon.GetComponent<GunBehaviour>().ShootManager();
         }
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     public void WeaponRemover()
     {
-        if (weaponHolder.transform.childCount > 0 && Input.GetKey("q"))
+        if (weaponHolder.transform.childCount > 1 && Input.GetKey("q"))
         {
             ReleaseWeapon();
         }
@@ -110,11 +110,13 @@ public class PlayerController : MonoBehaviour
         weapon.GetComponent<GunBehaviour>().UpdatePosition();
         weapon.GetComponent<Rigidbody>().isKinematic = true;
         currentWeapon = weapon;
+        mainCamera.transform.SetParent(weaponHolder.transform);
         mainCamera.transform.localPosition = shootCameraPosition.localPosition;
+
     }
     public void ReleaseWeapon()
     {
-        if (weaponHolder.transform.childCount > 0)
+        if (weaponHolder.transform.childCount > 1)
         {
             currentWeapon.transform.SetParent(null);
             playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("GunHolder"), 0);
@@ -122,8 +124,10 @@ public class PlayerController : MonoBehaviour
             currentWeapon.GetComponent<Rigidbody>().isKinematic = false;
             currentWeapon.GetComponent<Rigidbody>().velocity = transform.TransformDirection(new Vector3(1, 1, 5f));
             currentWeapon = null;
-            mainCamera.transform.localPosition = walkCameraPosition.localPosition;
+            mainCamera.transform.SetParent(transform);
+            mainCamera.transform.localPosition = walkCameraPosition.transform.localPosition;
             ManagerUI.Instance.NoHoldingWeapon();
+
         }
 
     }

@@ -23,7 +23,7 @@ public class SelectorAim : MonoBehaviour
 
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 2.0f))
         {
-            if (HitInfo.transform.gameObject.tag == "Gun" && gameManager.player.weaponHolder.transform.childCount == 0)
+            if (HitInfo.transform.gameObject.tag == "Gun" && gameManager.player.weaponHolder.transform.childCount == 1)
             {
                 managerUI.FoundSelectable();
                 if (Input.GetKey("e"))
