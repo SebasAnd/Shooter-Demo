@@ -1,6 +1,3 @@
-
-
-
 # Shooter Demo
 
 Shooter Demo for Unity version 2022.3.20f1.
@@ -20,13 +17,13 @@ Additionally, the interface includes a "Change Scene" button that enables player
 The second scene introduces the Shooter Demo with three unique weapons, each exhibiting different bullet behaviors:
 
 #### Hand Cannon
-A weapon designed to shoot a regular cannonball in a parabolic trajectory, resembling a red cannon.
+A weapon designed to shoot a regular cannonball in a parabolic trajectory, this weapon looks like a red cannon.
 
 #### Gravity Weapon
 This weapon shoots gravity ammo, which attracts scene objects to the bullet. When the distance is close enough, the objects move around the bullet until it disappears. The Gravity Weapon is represented by a golden rifle.
 
 #### Extra Weapon
-This weapon shoots a particular ammo that alters the target's scale in different sizes. If the target receives two or more ammo shots, its size increases. The Extra Weapon is depicted as a purple rifle.
+This weapon shoots a particular ammo that alters the target's scale in different sizes. If the target receives two or more ammo shots, its size increases. The Extra Weapon is a purple rifle.
 
 ## Usage
 Ensure Unity is installed, and the project is compatible with version 2022.3.20f1. Clone the repository and open the project in Unity to explore the Shooter Demo.
