@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform walkCameraPosition;
     [SerializeField] private Transform shootCameraPosition;
-
+    [SerializeField] private PlayerIkAnimator playerIkAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
     public void ShootWeaponManager()
     {
         if (weaponHolder.transform.childCount > 1 && Input.GetButtonDown("Fire1"))
@@ -105,15 +106,19 @@ public class PlayerController : MonoBehaviour
 
     public void AttachWeapon(GameObject weapon)
     {
+        GunBehaviour gunBehaviour = weapon.GetComponent<GunBehaviour>();
         weapon.transform.SetParent(weaponHolder.transform);
         playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("GunHolder"), 1);
         weapon.GetComponent<BoxCollider>().isTrigger = true;
-        weapon.GetComponent<GunBehaviour>().UpdatePosition();
+        gunBehaviour.UpdatePosition();
         weapon.GetComponent<Rigidbody>().isKinematic = true;
         currentWeapon = weapon;
         mainCamera.transform.SetParent(weaponHolder.transform);
         mainCamera.transform.localPosition = shootCameraPosition.localPosition;
-
+        playerIkAnimator.rightHandIKTarget = gunBehaviour.rightHand;
+        playerIkAnimator.rightElbowIKTarget = gunBehaviour.rightElbow;
+        playerIkAnimator.leftHandIKTarget = gunBehaviour.leftHand;
+        playerIkAnimator.leftElbowIKTarget = gunBehaviour.leftElbow;
     }
     public void ReleaseWeapon()
     {
@@ -124,6 +129,11 @@ public class PlayerController : MonoBehaviour
             currentWeapon.GetComponent<BoxCollider>().isTrigger = false;
             currentWeapon.GetComponent<Rigidbody>().isKinematic = false;
             currentWeapon.GetComponent<Rigidbody>().velocity = transform.TransformDirection(new Vector3(1, 1, 5f));
+            GunBehaviour gunBehaviour = currentWeapon.GetComponent<GunBehaviour>();
+            playerIkAnimator.rightHandIKTarget = null;
+            playerIkAnimator.rightElbowIKTarget = null;
+            playerIkAnimator.leftHandIKTarget = null;
+            playerIkAnimator.leftElbowIKTarget = null;
             currentWeapon = null;
             mainCamera.transform.SetParent(transform);
             mainCamera.transform.localPosition = walkCameraPosition.transform.localPosition;

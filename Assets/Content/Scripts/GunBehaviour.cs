@@ -12,6 +12,12 @@ public class GunBehaviour : MonoBehaviour
     [SerializeField] private Gun gun;
 
     [SerializeField] private Transform bulletIndicator;
+
+    public Transform rightHand;
+    public Transform rightElbow;
+    public Transform leftHand;
+    public Transform leftElbow;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
