@@ -37,7 +37,14 @@ public class PlayerCamera : MonoBehaviour
         rotationY += mouseX;
         rotationX -= mouseY;
 
-        rotationX = Math.Clamp(rotationX, -90f, 90f);
+        if (player.gameObject.GetComponent<PlayerController>().weaponHolder.transform.childCount > 1)
+        {
+            rotationX = Math.Clamp(rotationX, -40f, 40f);
+        }
+        else
+        {
+            rotationX = Math.Clamp(rotationX, -90f, 90f);
+        }
         transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
         player.rotation = Quaternion.Euler(0, rotationY, 0);
     }

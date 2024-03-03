@@ -96,6 +96,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public GameObject GiveWeaponHolder()
+    {
+        return weaponHolder;
+    }
     public void WeaponRemover()
     {
         if (weaponHolder.transform.childCount > 1 && Input.GetKey("q"))
