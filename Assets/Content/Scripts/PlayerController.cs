@@ -118,8 +118,8 @@ public class PlayerController : MonoBehaviour
         weapon.GetComponent<Rigidbody>().isKinematic = true;
         currentWeapon = weapon;
 
-        //mainCamera.transform.SetParent(weaponHolder.transform);
-        //mainCamera.transform.localPosition = shootCameraPosition.localPosition;
+        mainCamera.transform.SetParent(weaponHolder.transform);
+        mainCamera.transform.localPosition = shootCameraPosition.localPosition;
         playerIkAnimator.rightHandIKTarget = gunBehaviour.rightHand;
         playerIkAnimator.rightElbowIKTarget = gunBehaviour.rightElbow;
         playerIkAnimator.leftHandIKTarget = gunBehaviour.leftHand;
@@ -140,8 +140,8 @@ public class PlayerController : MonoBehaviour
             playerIkAnimator.leftHandIKTarget = null;
             playerIkAnimator.leftElbowIKTarget = null;
             currentWeapon = null;
-            //mainCamera.transform.SetParent(transform);
-            //mainCamera.transform.localPosition = walkCameraPosition.transform.localPosition;
+            mainCamera.transform.SetParent(transform);
+            mainCamera.transform.localPosition = walkCameraPosition.transform.localPosition;
             ManagerUI.Instance.NoHoldingWeapon();
 
         }
