@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
     public void AttachWeapon(GameObject weapon)
     {
         GunBehaviour gunBehaviour = weapon.GetComponent<GunBehaviour>();
-        weapon.transform.SetParent(weaponHolder.transform);
+        weapon.transform.SetParent(mainCamera.transform);
         playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("GunHolder"), 1);
         weapon.GetComponent<BoxCollider>().isTrigger = true;
         gunBehaviour.UpdatePosition();

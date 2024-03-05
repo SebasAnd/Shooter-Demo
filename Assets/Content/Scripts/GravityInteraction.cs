@@ -25,7 +25,7 @@ public class GravityInteraction : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         for (int i = 0; i < inRadius.Count; i++)
         {
@@ -36,7 +36,7 @@ public class GravityInteraction : MonoBehaviour
             }
             else
             {
-                inRadius[i].GetComponent<Rigidbody>().AddForce(transform.position - inRadius[i].transform.position);
+                inRadius[i].GetComponent<Rigidbody>().AddForce(transform.position - inRadius[i].transform.position, ForceMode.VelocityChange);
             }
 
 
