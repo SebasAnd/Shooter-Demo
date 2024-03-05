@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     public void ShootWeaponManager()
     {
-        if (weaponHolder.transform.childCount > 1 && Input.GetButtonDown("Fire1"))
+        if (currentWeapon != null && Input.GetButtonDown("Fire1"))
         {
             currentWeapon.GetComponent<GunBehaviour>().ShootManager();
         }
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
     }
     public void WeaponRemover()
     {
-        if (weaponHolder.transform.childCount > 1 && Input.GetKey("q"))
+        if (currentWeapon != null && Input.GetKey("q"))
         {
             ReleaseWeapon();
         }
@@ -117,8 +117,9 @@ public class PlayerController : MonoBehaviour
         gunBehaviour.UpdatePosition();
         weapon.GetComponent<Rigidbody>().isKinematic = true;
         currentWeapon = weapon;
-        mainCamera.transform.SetParent(weaponHolder.transform);
-        mainCamera.transform.localPosition = shootCameraPosition.localPosition;
+
+        //mainCamera.transform.SetParent(weaponHolder.transform);
+        //mainCamera.transform.localPosition = shootCameraPosition.localPosition;
         playerIkAnimator.rightHandIKTarget = gunBehaviour.rightHand;
         playerIkAnimator.rightElbowIKTarget = gunBehaviour.rightElbow;
         playerIkAnimator.leftHandIKTarget = gunBehaviour.leftHand;
@@ -126,7 +127,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ReleaseWeapon()
     {
-        if (weaponHolder.transform.childCount > 1)
+        if (currentWeapon != null)
         {
             currentWeapon.transform.SetParent(null);
             playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("GunHolder"), 0);
@@ -139,8 +140,8 @@ public class PlayerController : MonoBehaviour
             playerIkAnimator.leftHandIKTarget = null;
             playerIkAnimator.leftElbowIKTarget = null;
             currentWeapon = null;
-            mainCamera.transform.SetParent(transform);
-            mainCamera.transform.localPosition = walkCameraPosition.transform.localPosition;
+            //mainCamera.transform.SetParent(transform);
+            //mainCamera.transform.localPosition = walkCameraPosition.transform.localPosition;
             ManagerUI.Instance.NoHoldingWeapon();
 
         }
