@@ -22,6 +22,8 @@ public class GameManagerUI : MonoBehaviour
     [SerializeField] private AudioSource djTable;
     [SerializeField] private AudioClip[] music;
 
+    [SerializeField] private BunnyController[] peopleDance;
+
     // Start is called before the first frame update
 
 
@@ -45,6 +47,8 @@ public class GameManagerUI : MonoBehaviour
         HouseButton.onClick.AddListener(() => { player.PlaySelectedDance(3); PlayDance(false); });
         danceSelector.onValueChanged.AddListener(delegate { player.PlaySelectedDance(danceSelector.value); if (danceSelector.value == 1) { PlayDance(true); } else { PlayDance(false); } });
         ChangeScenceButton.onClick.AddListener(() => { SceneManager.LoadScene("Scene2", LoadSceneMode.Single); });
+
+
     }
 
     public void PlayDance(bool status)
@@ -67,6 +71,10 @@ public class GameManagerUI : MonoBehaviour
                 djTable.DOFade(0.1f, 1f);
             }
 
+        }
+        for (int i = 0; i < peopleDance.Length; i++)
+        {
+            peopleDance[i].ChangeDance(status);
         }
         bunny.ChangeDance(status);
     }
