@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
+using System;
+using Unity.VisualScripting;
 
 public class GameManagerUI : MonoBehaviour
 {
@@ -12,8 +15,12 @@ public class GameManagerUI : MonoBehaviour
     [SerializeField] private Button hipHopButton;
     [SerializeField] private Button HouseButton;
     [SerializeField] private Button ChangeScenceButton;
+    [SerializeField] private BunnyController bunny;
 
     [SerializeField] private TMPro.TMP_Dropdown danceSelector;
+
+    [SerializeField] private AudioSource djTable;
+    [SerializeField] private AudioClip[] music;
 
     // Start is called before the first frame update
 
@@ -33,18 +40,34 @@ public class GameManagerUI : MonoBehaviour
     }
     private void Start()
     {
-        macarenaButton.onClick.AddListener(() => { player.PlaySelectedDance(1); });
-        hipHopButton.onClick.AddListener(() => { player.PlaySelectedDance(2); });
-        HouseButton.onClick.AddListener(() => { player.PlaySelectedDance(3); });
-        danceSelector.onValueChanged.AddListener(delegate { player.PlaySelectedDance(danceSelector.value); });
+        macarenaButton.onClick.AddListener(() => { player.PlaySelectedDance(1); PlayDance(true); });
+        hipHopButton.onClick.AddListener(() => { player.PlaySelectedDance(2); PlayDance(false); });
+        HouseButton.onClick.AddListener(() => { player.PlaySelectedDance(3); PlayDance(false); });
+        danceSelector.onValueChanged.AddListener(delegate { player.PlaySelectedDance(danceSelector.value); if (danceSelector.value == 1) { PlayDance(true); } else { PlayDance(false); } });
         ChangeScenceButton.onClick.AddListener(() => { SceneManager.LoadScene("Scene2", LoadSceneMode.Single); });
     }
 
-    public void PlayDance(int dance)
+    public void PlayDance(bool status)
     {
-        player.PlaySelectedDance(dance);
+        if (status)
+        {
+            djTable.DOFade(0.0f, 1f);
+            djTable.clip = music[1];
+            djTable.Play();
+            djTable.DOFade(0.1f, 1f);
+        }
+        else
+        {
+
+            if (djTable.clip != music[0])
+            {
+                djTable.DOFade(0.0f, 1f);
+                djTable.clip = music[0];
+                djTable.Play();
+                djTable.DOFade(0.1f, 1f);
+            }
+
+        }
+        bunny.ChangeDance(status);
     }
-
-
-
 }
