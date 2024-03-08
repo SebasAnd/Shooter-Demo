@@ -23,7 +23,7 @@ public class PlayerCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         Rotate();
 

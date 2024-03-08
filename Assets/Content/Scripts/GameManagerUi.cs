@@ -24,6 +24,8 @@ public class GameManagerUI : MonoBehaviour
 
     [SerializeField] private BunnyController[] peopleDance;
 
+    [SerializeField] private bool isMacarena = false;
+
     // Start is called before the first frame update
 
 
@@ -42,10 +44,10 @@ public class GameManagerUI : MonoBehaviour
     }
     private void Start()
     {
-        macarenaButton.onClick.AddListener(() => { player.PlaySelectedDance(1); PlayDance(true); });
-        hipHopButton.onClick.AddListener(() => { player.PlaySelectedDance(2); PlayDance(false); });
-        HouseButton.onClick.AddListener(() => { player.PlaySelectedDance(3); PlayDance(false); });
-        danceSelector.onValueChanged.AddListener(delegate { player.PlaySelectedDance(danceSelector.value); if (danceSelector.value == 1) { PlayDance(true); } else { PlayDance(false); } });
+        macarenaButton.onClick.AddListener(() => { player.PlaySelectedDance(1); if (!isMacarena) { PlayDance(true); isMacarena = true; } });
+        hipHopButton.onClick.AddListener(() => { player.PlaySelectedDance(2); PlayDance(false); isMacarena = false; });
+        HouseButton.onClick.AddListener(() => { player.PlaySelectedDance(3); PlayDance(false); isMacarena = false; });
+        danceSelector.onValueChanged.AddListener(delegate { player.PlaySelectedDance(danceSelector.value); if (danceSelector.value == 1) { PlayDance(true); isMacarena = true; } else { PlayDance(false); isMacarena = false; } });
         ChangeScenceButton.onClick.AddListener(() => { SceneManager.LoadScene("Scene2", LoadSceneMode.Single); });
 
 
