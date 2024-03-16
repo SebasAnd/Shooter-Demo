@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,9 +10,15 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private Vector3 direction;
+    private Vector3 velocity;
+
+    [SerializeField] public bool isGrounded;
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask groundMask;
     private CharacterController controller;
 
-    private double gravity;
+    [SerializeField] private float gravity;
+    [SerializeField] private float jumpHeight;
 
     void Start()
     {
@@ -20,20 +27,52 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        InterfaceValidation();
+    }
+
+    public void InterfaceValidation()
+    {
+        if (!GameManager.Instance.userInInterface)
+        {
+            MovePlayer();
+        }
     }
     private void MovePlayer()
     {
-        float moveZ = Input.GetAxis("Vertical");
-        float moveX = Input.GetAxis("Horizontal");
+        isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
 
-        gravity -= 9.81 * Time.deltaTime;
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+        if (isGrounded)
+        {
+            float moveZ = Input.GetAxis("Vertical");
+            float moveX = Input.GetAxis("Horizontal");
 
-        direction = new Vector3(moveX, (float)gravity, moveZ);
+            //gravity -= gravity * Time.deltaTime;
 
-        direction = transform.TransformDirection(direction);
-        direction *= moveSpeed;
+            direction = new Vector3(moveX, 0, moveZ);
+
+            direction = transform.TransformDirection(direction);
+            direction *= moveSpeed;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
+
+        }
+
+
         controller.Move(direction * Time.deltaTime);
+        velocity.y += -gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        velocity.y = Mathf.Sqrt(jumpHeight * 2 * gravity);
     }
 
 

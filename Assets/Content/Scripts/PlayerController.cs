@@ -86,7 +86,23 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         InterfaceValidation();
+        GroundValidation();
 
+    }
+    private void GroundValidation()
+    {
+        playerAnimator.SetBool("Jump", !GetComponent<PlayerMovement>().isGrounded);
+        if (playerAnimator.GetBool("Jump"))
+        {
+
+            print("air");
+            playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("Jump"), 1);
+
+        }
+        else
+        {
+            playerAnimator.SetLayerWeight(playerAnimator.GetLayerIndex("Jump"), 0);
+        }
     }
 
     public void PauseAllANimations()
@@ -107,7 +123,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.userInInterface)
         {
-            AnimationUpdate();
+            if (GetComponent<PlayerMovement>().isGrounded)
+            {
+                AnimationUpdate();
+            }
+
             WeaponRemover();
             ShootWeaponManager();
         }

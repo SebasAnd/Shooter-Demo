@@ -575,7 +575,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1386,6 +1386,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   direction: {x: 0, y: 0, z: 0}
+  isGrounded: 0
+  groundCheckDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  gravity: 9.81
+  jumpHeight: 3
 --- !u!143 &319550199
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3067,7 +3074,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 8400000, guid: a1a14953373d48d46a8a6a950a9395a7, type: 2}
   m_TargetDisplay: 0
@@ -4543,7 +4550,7 @@ GameObject:
   - component: {fileID: 1338901129}
   - component: {fileID: 1338901128}
   - component: {fileID: 1338901127}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
