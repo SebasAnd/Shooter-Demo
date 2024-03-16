@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 
 public class ManagerUI : MonoBehaviour
 {
     public static ManagerUI Instance { get; private set; }
 
-    [SerializeField] private Image crossHair;
+    [SerializeField] private UnityEngine.UI.Image crossHair;
     [SerializeField] private GameObject indicator;
 
     [SerializeField] private Sprite defaultCrossHair;
     [SerializeField] private Sprite weaponCrossHair;
     [SerializeField] private GameObject releaseTip;
+
+    [SerializeField] private TMPro.TMP_Text SensbilityText;
+
+    [SerializeField] public UnityEngine.UI.Slider sliderS;
 
     private void Awake()
     {
@@ -28,6 +33,8 @@ public class ManagerUI : MonoBehaviour
             Instance = this;
         }
     }
+
+
 
 
     public void FoundSelectable()
@@ -50,4 +57,10 @@ public class ManagerUI : MonoBehaviour
         crossHair.color = Color.white;
         releaseTip.gameObject.SetActive(false);
     }
+
+    public void ChangeSense(float value)
+    {
+        SensbilityText.text = "" + value.ToString("#.00");
+    }
+
 }

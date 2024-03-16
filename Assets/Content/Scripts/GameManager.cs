@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public PlayerCamera playerCamera;
     [SerializeField] public GameObject ammoUsed;
 
+    public bool userInInterface;
+
     // Start is called before the first frame update
 
 

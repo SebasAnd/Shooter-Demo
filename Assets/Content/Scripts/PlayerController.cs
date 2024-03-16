@@ -34,40 +34,45 @@ public class PlayerController : MonoBehaviour
 
         if (moveZ > 0 && moveX == 0)
         {
+
             playerAnimator.SetInteger("Walk", 1);
         }
         if (moveX > 0 && moveZ > 0)
         {
+            playerAnimator.SetInteger("Walk", 1);
             playerAnimator.SetInteger("Walk", 5);
         }
         if (moveX < 0 && moveZ > 0)
         {
+            playerAnimator.SetInteger("Walk", 1);
             playerAnimator.SetInteger("Walk", 6);
         }
         if (moveX > 0 && moveZ == 0)
         {
+
             playerAnimator.SetInteger("Walk", 3);
         }
         if (moveX < 0 && moveZ == 0)
         {
+
             playerAnimator.SetInteger("Walk", 4);
         }
 
         if (moveZ < 0 && moveX < 0)
         {
+            playerAnimator.SetInteger("Walk", 2);
             playerAnimator.SetInteger("Walk", 7);
         }
         if (moveZ < 0 && moveX > 0)
         {
+            playerAnimator.SetInteger("Walk", 2);
             playerAnimator.SetInteger("Walk", 8);
         }
         if (moveZ < 0 && moveX == 0)
         {
+
             playerAnimator.SetInteger("Walk", 2);
-        }
-        if (moveZ < 0 && moveX == 0)
-        {
-            playerAnimator.SetInteger("Walk", 2);
+
         }
         if (moveZ == 0 && moveX == 0)
         {
@@ -80,10 +85,32 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        AnimationUpdate();
-        WeaponRemover();
-        ShootWeaponManager();
+        InterfaceValidation();
 
+    }
+
+    public void PauseAllANimations()
+    {
+        playerAnimator.enabled = false;
+    }
+    public void ResumeAllANimations()
+    {
+        if (!playerAnimator.enabled)
+        {
+            playerAnimator.enabled = true;
+        }
+
+    }
+
+
+    public void InterfaceValidation()
+    {
+        if (!GameManager.Instance.userInInterface)
+        {
+            AnimationUpdate();
+            WeaponRemover();
+            ShootWeaponManager();
+        }
     }
 
 

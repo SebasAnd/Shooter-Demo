@@ -21,7 +21,7 @@ public class SelectorAim : MonoBehaviour
         Transform cameraTransform = transform;
         //Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 100.0f, Color.red);
 
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 2.0f))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 2.0f) && !gameManager.userInInterface)
         {
             if (HitInfo.transform.gameObject.tag == "Gun" && gameManager.player.currentWeapon == null)
             {
